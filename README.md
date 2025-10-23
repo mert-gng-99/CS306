@@ -118,10 +118,3 @@ This project is intended for educational purposes as part of the CS306 Database 
 
 ---
 
-Would you like to add:
-
-* Visuals like ER diagrams or schema graphs?
-* API interface (if any planned)?
-* Future expansion plans (e.g., adding pricing, customer feedback, etc.)?
-
-Let me know, and I can update the README accordingly.
