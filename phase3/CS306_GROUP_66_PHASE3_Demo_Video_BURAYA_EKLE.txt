@@ -1,0 +1,11 @@
+Bu dosyayı kendi çektiğin demo videosu ile değiştir.
+
+Video gereksinimleri:
+- Maksimum 3 dakika
+- XAMPP çalışıyor olmalı (Apache + MySQL)
+- MongoDB Compass açık olmalı
+- Her trigger'ı test et
+- Her procedure'ü test et
+- Ticket oluştur, listele, yorum ekle
+- Admin olarak ticket çöz
+- Sesli anlatım yap

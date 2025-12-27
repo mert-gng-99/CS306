@@ -1,0 +1,9 @@
+Bu dosyayı kendi hazırladığın PDF raporu ile değiştir.
+
+PDF raporunda olması gerekenler:
+1. İlk sayfa: CS306, Phase 3, Grup 66, tüm üyelerin adları ve numaraları
+2. Her trigger için: SQL kodu + buton açıklamaları
+3. Her procedure için: SQL kodu + input kutusu açıklamaları
+4. MongoDB sorguları için: PHP kodları
+5. Ekran görüntüleri
+6. Support ticket sistemi açıklaması
