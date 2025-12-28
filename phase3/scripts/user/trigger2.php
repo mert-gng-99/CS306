@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
 
 <body>
     <div class="trigger-box">
-        <div class="trigger-title">Trigger 2 (by Kaan Berk): This is a sample trigger description</div>
+        <div class="trigger-title">Trigger 2 (by Kaan Berk Karabıyık): This is a sample trigger description</div>
         <form method="POST">
             <button type="submit" name="case" value="1" class="case-btn">Case 1</button>
             <button type="submit" name="case" value="2" class="case-btn">Case 2</button>

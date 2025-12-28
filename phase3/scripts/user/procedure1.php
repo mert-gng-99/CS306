@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <body>
     <div class="proc-box">
-        <div class="proc-title">Stored Procedure 1 (by Thorin Oakenshield): This is a sample stored procedure
+        <div class="proc-title">Stored Procedure 1 (by Mert Güngör): This is a sample stored procedure
             description</div>
         <form method="POST">
             <div class="param-row">

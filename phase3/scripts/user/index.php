@@ -80,7 +80,8 @@
         </div>
         <div class="item">
             <div class="item-title">
-                <a href="trigger2.php">Trigger 2 (by Kaan Berk)</a>: This is another sample trigger description
+                <a href="trigger2.php">Trigger 2 (by Kaan Berk Karabıyık)</a>: This is another sample trigger
+                description
             </div>
             <div class="item-desc">Logs deleted bookings to Booking_Log table</div>
         </div>
@@ -90,14 +91,14 @@
     <div class="section">
         <div class="item">
             <div class="item-title">
-                <a href="procedure1.php">Stored Procedure 1 (by Thorin Oakenshield)</a>: This is a sample stored
+                <a href="procedure1.php">Stored Procedure 1 (by Mert Güngör)</a>: This is a sample stored
                 procedure description
             </div>
             <div class="item-desc">Gets passenger manifest for a flight</div>
         </div>
         <div class="item">
             <div class="item-title">
-                <a href="procedure2.php">Stored Procedure 2 (by Agent Smith)</a>: This is another sample stored
+                <a href="procedure2.php">Stored Procedure 2 (by Kaan Berk Karabıyık)</a>: This is another sample stored
                 procedure description
             </div>
             <div class="item-desc">Schedules a new flight</div>
