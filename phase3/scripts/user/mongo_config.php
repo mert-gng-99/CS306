@@ -71,7 +71,13 @@ function addComment($manager, $ticketId, $comment, $author = 'user')
     global $mongo_db, $mongo_collection;
 
     $bulk = new MongoDB\Driver\BulkWrite();
-    $commentData = $author . ": " . $comment;
+
+    // Comment structure for PDF Figure 10:
+    $commentData = [
+        'username' => $author,
+        'comment' => $comment,
+        'created_at' => date('Y-m-d H:i:s')
+    ];
 
     $bulk->update(
         ['_id' => new MongoDB\BSON\ObjectId($ticketId)],

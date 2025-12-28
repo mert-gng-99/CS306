@@ -118,7 +118,12 @@ if ($ticket_id) {
             <h3>Comments:</h3>
             <?php if (count($ticket->comments) > 0): ?>
                 <?php foreach ($ticket->comments as $comment): ?>
-                    <div class="comment-item"><?php echo htmlspecialchars($comment); ?></div>
+                    <div class="comment-item">
+                        <strong><?php echo htmlspecialchars($comment->username); ?></strong>
+                        <span style="font-size:12px; color:#888;">(<?php echo htmlspecialchars($comment->created_at); ?>)</span>:
+                        <br>
+                        <?php echo htmlspecialchars($comment->comment); ?>
+                    </div>
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>No comments yet.</p>
