@@ -258,7 +258,7 @@ DROP TRIGGER IF EXISTS check_capacity_before_insert;
 DROP TRIGGER IF EXISTS log_booking_delete;
 
 -- TRIGGER 1: Check Capacity Before Insert
--- This trigger checks if the flight is full before adding a new booking
+-- this trigger checks if flight is full before new booking
 DELIMITER //
 CREATE TRIGGER check_capacity_before_insert
 BEFORE INSERT ON Booking
@@ -267,18 +267,18 @@ BEGIN
     DECLARE current_passengers INT;
     DECLARE max_capacity INT;
     
-    -- Get aircraft capacity for this flight
+    -- get plane capacity for this flight
     SELECT A.capacity INTO max_capacity
     FROM Flight F
     JOIN Aircraft A ON F.aircraft_id_fk = A.aircraft_id
     WHERE F.flight_number = NEW.flight_number_fk;
     
-    -- Count current passengers on this flight
+    -- count passengers on this flight
     SELECT COUNT(*) INTO current_passengers
     FROM Booking
     WHERE flight_number_fk = NEW.flight_number_fk;
     
-    -- If flight is full, prevent the booking
+    -- if flight is full, stop the booking
     IF current_passengers >= max_capacity THEN
         SIGNAL SQLSTATE '45000'
         SET MESSAGE_TEXT = 'ERROR: Flight is full! Cannot accept new booking.';
@@ -288,13 +288,13 @@ DELIMITER ;
 
 
 -- TRIGGER 2: Log Booking Delete
--- This trigger logs every deleted booking to the Booking_Log table
+-- this trigger saves deleted bookings to log table
 DELIMITER //
 CREATE TRIGGER log_booking_delete
 AFTER DELETE ON Booking
 FOR EACH ROW
 BEGIN
-    -- Save deleted booking info to log table
+    -- save deleted booking to log table
     INSERT INTO Booking_Log (flight_number, seat_number, deleted_at, user_action)
     VALUES (OLD.flight_number_fk, OLD.seat_number, NOW(), 'Booking Cancelled');
 END //
@@ -310,11 +310,11 @@ DROP PROCEDURE IF EXISTS GetPassengerManifest;
 DROP PROCEDURE IF EXISTS ScheduleFlight;
 
 -- PROCEDURE 1: GetPassengerManifest
--- Returns the passenger list for a specific flight
+-- returns passenger list for a flight
 DELIMITER //
 CREATE PROCEDURE GetPassengerManifest(IN flightNo VARCHAR(10))
 BEGIN
-    -- Get all passengers with their seats for this flight
+    -- get all passengers and seats for this flight
     SELECT P.first_name, P.last_name, B.seat_number
     FROM Booking B
     JOIN Passenger P ON B.passenger_id_fk = P.passenger_id
@@ -324,7 +324,7 @@ DELIMITER ;
 
 
 -- PROCEDURE 2: ScheduleFlight
--- Creates a new flight with given parameters (uses THY airline and IST->LHR route as default)
+-- creates a new flight with given info (uses THY airline and IST to LHR as default)
 DELIMITER //
 CREATE PROCEDURE ScheduleFlight(
     IN f_num VARCHAR(10), 
@@ -333,7 +333,7 @@ CREATE PROCEDURE ScheduleFlight(
     IN f_plane VARCHAR(10)
 )
 BEGIN
-    -- Insert new flight with default route
+    -- add new flight with default route
     INSERT INTO Flight (flight_number, departure_time, arrival_time, airline_code_fk, aircraft_id_fk, origin_airport_fk, dest_airport_fk)
     VALUES (f_num, f_dep, f_arr, 'THY', f_plane, 'IST', 'LHR');
     
