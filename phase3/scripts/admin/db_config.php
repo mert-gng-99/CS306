@@ -1,5 +1,5 @@
 <?php
-// MySQL Database Connection (same as user)
+// mysql database connection
 $db_host = "localhost";
 $db_user = "root";
 $db_pass = "";

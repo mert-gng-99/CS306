@@ -1,19 +1,19 @@
 <?php
-// MongoDB Connection using MongoDB\Driver\Manager
-// Make sure you have the MongoDB PHP extension installed
+// mongodb connection
+// mongodb php extension is needed
 
 $mongo_host = "mongodb://localhost:27017";
 $mongo_db = "support_tickets";
 $mongo_collection = "tickets";
 
-// Create MongoDB Manager
+// create mongodb manager
 try {
     $mongoManager = new MongoDB\Driver\Manager($mongo_host);
 } catch (Exception $e) {
     die("MongoDB Connection Error: " . $e->getMessage());
 }
 
-// Helper function to get all tickets (active only, optional username filter)
+// get all tickets
 function getTickets($manager, $username = null, $onlyActive = true)
 {
     global $mongo_db, $mongo_collection;
@@ -32,7 +32,7 @@ function getTickets($manager, $username = null, $onlyActive = true)
     return $cursor->toArray();
 }
 
-// Helper function to get one ticket by ID
+// get one ticket by id
 function getTicketById($manager, $ticketId)
 {
     global $mongo_db, $mongo_collection;
@@ -45,7 +45,7 @@ function getTicketById($manager, $ticketId)
     return count($result) > 0 ? $result[0] : null;
 }
 
-// Helper function to create a new ticket
+// create a new ticket
 function createTicket($manager, $username, $message)
 {
     global $mongo_db, $mongo_collection;
@@ -55,7 +55,7 @@ function createTicket($manager, $username, $message)
         'username' => $username,
         'message' => $message,
         'created_at' => date('Y-m-d H:i:s'),
-        'status' => true,  // Active ticket
+        'status' => true,  // active ticket
         'comments' => []
     ];
 
@@ -65,14 +65,14 @@ function createTicket($manager, $username, $message)
     return $result->getInsertedCount() > 0;
 }
 
-// Helper function to add comment to a ticket
+// add comment to a ticket
 function addComment($manager, $ticketId, $comment, $author = 'user')
 {
     global $mongo_db, $mongo_collection;
 
     $bulk = new MongoDB\Driver\BulkWrite();
 
-    // Comment structure for PDF Figure 10:
+    // comment data
     $commentData = [
         'username' => $author,
         'comment' => $comment,
@@ -88,7 +88,7 @@ function addComment($manager, $ticketId, $comment, $author = 'user')
     return $result->getModifiedCount() > 0;
 }
 
-// Helper function to mark ticket as resolved (status = false)
+// mark ticket as done
 function resolveTicket($manager, $ticketId)
 {
     global $mongo_db, $mongo_collection;

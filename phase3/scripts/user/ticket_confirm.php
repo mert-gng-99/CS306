@@ -1,6 +1,6 @@
 <?php
-// Ticket Confirmation Page
-// Shows result after creating a ticket
+// ticket confirmation page
+// shows result after creating a ticket
 
 require_once 'mongo_config.php';
 

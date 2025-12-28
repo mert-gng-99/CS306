@@ -1,18 +1,18 @@
 <?php
-// Trigger 2: Log Booking Delete
-// This trigger logs deleted bookings to Booking_Log table
+// trigger 2: log booking delete
+// logs deleted bookings to booking_log table
 
 require_once 'db_config.php';
 
 $message = "";
 $result_data = [];
 
-// Handle button clicks
+// handle button clicks
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
     $case = $_POST['case'];
 
     if ($case == 1) {
-        // Case 1: Delete a booking to trigger the log
+        // case 1: delete a booking to trigger the log
         $sql = "DELETE FROM Booking WHERE flight_number_fk = 'TK001' AND seat_number = '10F' LIMIT 1";
         if ($conn->query($sql) === TRUE && $conn->affected_rows > 0) {
             $message = "SUCCESS: Booking deleted. Check Booking_Log table for the log entry.";
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
             $message = "No booking found to delete (may already be deleted)";
         }
     } elseif ($case == 2) {
-        // Case 2: Show Booking_Log table
+        // case 2: show booking_log table
         $sql = "SELECT * FROM Booking_Log ORDER BY deleted_at DESC LIMIT 10";
         $result = $conn->query($sql);
         if ($result) {
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
         }
         $message = "Showing Booking_Log table (filled by trigger)";
     } elseif ($case == 3) {
-        // Case 3: Restore the test booking
+        // case 3: restore the test booking
         $sql = "INSERT IGNORE INTO Booking (passenger_id_fk, flight_number_fk, seat_number, booking_date) 
                 VALUES (3, 'TK001', '10F', CURDATE())";
         $conn->query($sql);

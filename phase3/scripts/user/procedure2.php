@@ -1,12 +1,12 @@
 <?php
-// Stored Procedure 2: ScheduleFlight
-// Creates a new flight with user inputs
+// stored procedure 2: scheduleflight
+// creates a new flight with user inputs
 
 require_once 'db_config.php';
 
 $message = "";
 
-// Handle form submission
+// handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param1 = $conn->real_escape_string($_POST['parameter1']); // flight number
     $param2 = $conn->real_escape_string($_POST['parameter2']); // departure
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param4 = $conn->real_escape_string($_POST['parameter4']); // aircraft
 
     if ($param1 && $param2 && $param3 && $param4) {
-        // Call the stored procedure
+        // call the stored procedure
         $sql = "CALL ScheduleFlight('$param1', '$param2', '$param3', '$param4')";
         $result = $conn->query($sql);
 

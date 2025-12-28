@@ -1,6 +1,6 @@
 <?php
-// Support Tickets - List Page
-// Shows tickets with dropdown to select username
+// support tickets - list page
+// shows tickets with dropdown to select username
 
 require_once 'mongo_config.php';
 
@@ -8,7 +8,7 @@ $selected_username = isset($_GET['username']) ? $_GET['username'] : '';
 $tickets = [];
 $all_usernames = [];
 
-// Get all unique usernames that have active tickets
+// get all unique usernames with active tickets
 $all_tickets = getTickets($mongoManager, null, true);
 foreach ($all_tickets as $t) {
     if (!in_array($t->username, $all_usernames)) {
@@ -16,7 +16,7 @@ foreach ($all_tickets as $t) {
     }
 }
 
-// Get tickets for selected username
+// get tickets for selected username
 if ($selected_username) {
     $tickets = getTickets($mongoManager, $selected_username, true);
 }

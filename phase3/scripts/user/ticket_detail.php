@@ -1,12 +1,12 @@
 <?php
-// Ticket Detail Page - View and add comments
+// ticket detail page - view and add comments
 
 require_once 'mongo_config.php';
 
 $ticket_id = isset($_GET['id']) ? $_GET['id'] : '';
 $message = "";
 
-// Handle comment submission
+// handle comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
     $comment = trim($_POST['comment']);
     if ($comment && $ticket_id) {
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
     }
 }
 
-// Get ticket details
+// get ticket details
 $ticket = null;
 if ($ticket_id) {
     $ticket = getTicketById($mongoManager, $ticket_id);

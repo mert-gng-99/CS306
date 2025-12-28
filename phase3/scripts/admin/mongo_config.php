@@ -1,5 +1,5 @@
 <?php
-// MongoDB Connection for Admin (same as user)
+// mongodb connection for admin
 $mongo_host = "mongodb://localhost:27017";
 $mongo_db = "support_tickets";
 $mongo_collection = "tickets";
@@ -10,7 +10,7 @@ try {
     die("MongoDB Connection Error: " . $e->getMessage());
 }
 
-// Get all active tickets (admin sees ALL users)
+// get all active tickets
 function getAllActiveTickets($manager)
 {
     global $mongo_db, $mongo_collection;
@@ -22,7 +22,7 @@ function getAllActiveTickets($manager)
     return $cursor->toArray();
 }
 
-// Get ticket by ID
+// get ticket by id
 function getTicketById($manager, $ticketId)
 {
     global $mongo_db, $mongo_collection;
@@ -35,14 +35,14 @@ function getTicketById($manager, $ticketId)
     return count($result) > 0 ? $result[0] : null;
 }
 
-// Add comment as admin
+// add comment as admin
 function addAdminComment($manager, $ticketId, $comment)
 {
     global $mongo_db, $mongo_collection;
 
     $bulk = new MongoDB\Driver\BulkWrite();
 
-    // Comment structure: username, comment, created_at
+    // comment data
     $commentData = [
         'username' => 'admin',
         'comment' => $comment,
@@ -58,7 +58,7 @@ function addAdminComment($manager, $ticketId, $comment)
     return $result->getModifiedCount() > 0;
 }
 
-// Mark ticket as resolved
+// mark ticket as done
 function resolveTicket($manager, $ticketId)
 {
     global $mongo_db, $mongo_collection;

@@ -1,18 +1,18 @@
 <?php
-// Stored Procedure 1: GetPassengerManifest
-// Shows passenger list for a specific flight
+// stored procedure 1: getpassengermanifest
+// shows passenger list for a flight
 
 require_once 'db_config.php';
 
 $passengers = [];
 $message = "";
 
-// Handle form submission
+// handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $param1 = isset($_POST['parameter1']) ? $conn->real_escape_string($_POST['parameter1']) : '';
 
     if ($param1) {
-        // Call the stored procedure
+        // call the stored procedure
         $sql = "CALL GetPassengerManifest('$param1')";
         $result = $conn->query($sql);
 

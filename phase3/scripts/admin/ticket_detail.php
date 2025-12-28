@@ -1,13 +1,13 @@
 <?php
-// Admin Ticket Detail Page
-// Admin can view, add comments, and mark as resolved
+// admin ticket detail page
+// admin can view, add comments, and mark as done
 
 require_once 'mongo_config.php';
 
 $ticket_id = isset($_GET['id']) ? $_GET['id'] : '';
 $message = "";
 
-// Handle actions
+// handle actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         if ($_POST['action'] === 'comment' && isset($_POST['comment'])) {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Get ticket details
+// get ticket details
 $ticket = null;
 if ($ticket_id) {
     $ticket = getTicketById($mongoManager, $ticket_id);

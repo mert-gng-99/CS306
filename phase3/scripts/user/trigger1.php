@@ -1,18 +1,18 @@
 <?php
-// Trigger 1: Check Capacity Before Insert
-// This trigger stops booking if flight is full
+// trigger 1: check capacity before insert
+// stops booking if flight is full
 
 require_once 'db_config.php';
 
 $message = "";
 $result_data = [];
 
-// Handle button clicks
+// handle button clicks
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
     $case = $_POST['case'];
 
     if ($case == 1) {
-        // Case 1: Try to book on a flight with space
+        // case 1: try to book on a flight with space
         $sql = "INSERT INTO Booking (passenger_id_fk, flight_number_fk, seat_number, booking_date) 
                 VALUES (1, 'QR240', '30A', CURDATE())";
         if ($conn->query($sql) === TRUE) {
@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
             $message = "ERROR: " . $conn->error;
         }
     } elseif ($case == 2) {
-        // Case 2: Show current booking count
+        // case 2: show current booking count
         $sql = "SELECT F.flight_number, A.capacity, COUNT(B.passenger_id_fk) as booked
                 FROM Flight F
                 JOIN Aircraft A ON F.aircraft_id_fk = A.aircraft_id
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['case'])) {
         }
         $message = "Showing current flight capacity status";
     } elseif ($case == 3) {
-        // Case 3: Delete the test booking
+        // case 3: delete the test booking
         $sql = "DELETE FROM Booking WHERE flight_number_fk = 'QR240' AND seat_number = '30A'";
         $conn->query($sql);
         $message = "Test booking removed (if it existed)";
