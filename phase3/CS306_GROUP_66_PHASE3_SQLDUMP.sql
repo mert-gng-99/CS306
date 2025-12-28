@@ -59,13 +59,11 @@ CREATE TABLE Aircraft (
   model           VARCHAR(50) NOT NULL,
   capacity        INT         NOT NULL,
   airline_code_fk VARCHAR(3)  NOT NULL,
-  CONSTRAINT ck_aircraft_capacity CHECK (capacity > 0),
   CONSTRAINT fk_aircraft_airline
     FOREIGN KEY (airline_code_fk) REFERENCES Airline(airline_code)
     ON UPDATE CASCADE
     ON DELETE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- Pilot Table
 CREATE TABLE Pilot (
   pilot_id        INT PRIMARY KEY AUTO_INCREMENT,
@@ -88,8 +86,6 @@ CREATE TABLE Flight (
   aircraft_id_fk    VARCHAR(10) NOT NULL,
   origin_airport_fk VARCHAR(3)  NOT NULL,
   dest_airport_fk   VARCHAR(3)  NOT NULL,
-  CONSTRAINT ck_flight_times    CHECK (arrival_time > departure_time),
-  CONSTRAINT ck_flight_airports CHECK (origin_airport_fk <> dest_airport_fk),
   CONSTRAINT fk_flight_airline
     FOREIGN KEY (airline_code_fk)   REFERENCES Airline(airline_code)
     ON UPDATE CASCADE ON DELETE RESTRICT,
